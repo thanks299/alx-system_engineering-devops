@@ -12,8 +12,8 @@ while [ $hour -le 12 ]; do
 
   # Loop for 59 minutes
   while [ $minute -le 59 ]; do
-    # Display the current minute
-    echo "$minute"
+    # Display the current time in the format "Hour: Minute"
+    echo "Hour: $hour Minute: $minute"
 
     # Increment the minute variable
     minute=$((minute + 1))
