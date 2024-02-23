@@ -1,0 +1,6 @@
+#!/bin/bash
+while IFS=: read -r line
+do
+    echo "$line" | cut -d: -f1,2,3,4,5,6,7
+done < /etc/passwd
+
