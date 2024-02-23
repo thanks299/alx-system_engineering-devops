@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
-# This script displays "Best School" 10 times, with "Hi" printed on a new line for the 9th iteration
+# Bash script that displays Best School 10 times with while loop
+# 9th iteration, displays Best School and then Hi
 
-i=1
-while [ $i -le 10 ]; do
-  if [ $i -eq 9 ]; then
+u=0
+
+while [ $u -lt 10 ]
+do
+  if [ $u -eq 9 ]
+  then
     echo "Hi"
-  else
-    echo "Best School"
   fi
-  i=$((i + 1))
+  echo "Best School"
+  (( u++ ))
 done
 
