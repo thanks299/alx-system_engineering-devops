@@ -2,5 +2,5 @@
 # Display the PID and process name of processes whose name contain the word 'bash'
 # Do not use the 'ps' command
 
-pgrep -x bash
+pgrep -l bash
 
