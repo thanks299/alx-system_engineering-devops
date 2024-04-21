@@ -3,4 +3,4 @@
 # This script connects to a server using SSH with a private key
 
 # Connect to the server using SSH with the specified private key and username
-ssh -i ~/.ssh/school ubuntu@server01
+ssh -i ~/.ssh/school ubuntu@18.234.249.177
