@@ -1,6 +1,6 @@
 # SSH configuration
 
-HostName 18.234.249.177
+HostName 18.204.9.166
 User ubuntu
 IdentityFile ~/.ssh/school
 PasswordAuthentication no
