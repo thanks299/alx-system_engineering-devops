@@ -12,12 +12,12 @@ function install() {
 
         #shellcheck disable=SC2181
         if [ $? -ne 0 ]; then
-                echo -e "        Installing: $1$\n"
+                echo -e "       Installing: $1$\n"
                 sudo apt-get update -y -qq && \
                         sudo apt-get install -y "$1" -qq
                 echo -e "\n"
         else
-                echo -e "        ${1} is already installed.\n"
+                echo -e "       ${1} is already installed.\n"
         fi
 }
 
@@ -59,7 +59,7 @@ server_config=\
                 listen 80 default_server;
                 listen [::]:80 default_server;
                 root /var/www/html;
-                index index.html index.htm index.nginx-debian.html;
+                index index.html index.htm index.nginx-debian.html
                 server_name_;
                 add_header X-Served-By \$hostname;
                 location / {
@@ -82,3 +82,4 @@ if [ "$(pgrep -c nginx)" -le 0 ]; then
 else
         sudo service nginx restart
 fi
+
