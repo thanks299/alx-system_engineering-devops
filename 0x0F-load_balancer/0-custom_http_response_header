@@ -75,7 +75,7 @@ server_config=\
 }"
 
 #shellcheck disable=SC2154
-echo "$server_config" | sudo dd status=none of=/etc/nginx/sites-enabled/default
+echo "$server_config" | sudo tee /etc/nginx/sites-enabled/default >/dev/null
 
 if [ "$(pgrep -c nginx)" -le 0 ]; then
         sudo service nginx start
