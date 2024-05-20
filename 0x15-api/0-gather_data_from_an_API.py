@@ -18,7 +18,7 @@ if __name__ == "__main__":
     - Export data to JSON file
     """
 
-    api_url = "(link unavailable)"
+    api_url = "https://jsonplaceholder.typicode.com/"
     user_id = sys.argv[1]
 
     user = requests.get(api_url + "users/{}".format(user_id)).json()
