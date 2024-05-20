@@ -36,7 +36,7 @@ defaults
 
 frontend thanks299-tech-frontend
     bind *:80
-    default_backend thanks299-tech-backend
+    default_backend webservers
 
 backend thanks299-tech-backend
     balance roundrobin
