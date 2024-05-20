@@ -1,22 +1,29 @@
 #!/usr/bin/python3
+"""
+Returns information about his/her todo list progress
+"""
+
+
 import requests
 import sys
 
-if len(sys.argv) != 2:
-    print("Usage: python3 (link unavailable) <employee_id>")
-    sys.exit(1)
 
-employee_id = int(sys.argv[1])
+if __name__ == "__main__":
+    """
+    code process:
+     - API Base URL
+     - Gets user data
+     - Gets todos for the specified user
+     - Extract completed tasks
+     - Print info about the employee's todo list progress
+     - Print titles of tasks completed
+    """
+    api_url = "https://jsonplaceholder.typicode.com/"
+    user = requests.get(api_url + "users/{}".format(sys.argv[1])).json()
+    todos = requests.get(api_url + "todos",
+                         params={"userId": sys.argv[1]}).json()
+    done = [u.get("title") for u in todos if u.get("completed") is True]
 
-response = requests.get(f'(link unavailable)')
-user_data = response.json()
-
-todo_response = requests.get(f'(link unavailable)')
-todo_data = todo_response.json()
-
-completed_tasks = [task['title'] for task in todo_data if task['completed']]
-total_tasks = len(todo_data)
-
-print(f'Employee {user_data["name"]} is done with tasks({len(completed_tasks)}/{total_tasks}):')
-for task in completed_tasks:
-    print(f'\t{task}')
+    print("Employee {} is done with tasks({}/{}):".format(
+        user.get("name"), len(done), len(todos)))
+    [print("\t {}".format(v)) for v in done]
