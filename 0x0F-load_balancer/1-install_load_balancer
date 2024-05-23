@@ -40,8 +40,8 @@ frontend thanks299-tech-frontend
 
 backend thanks299-tech-backend
     balance roundrobin
-    server 503248-web-01 34.232.69.22 check
-    server 503248-web-02 100.26.221.59 check
+    server 503248-web-01 35.168.3.207 check
+    server 503248-web-02 54.152.54.130 check
 "
 
 # shellcheck disable=SC2154
