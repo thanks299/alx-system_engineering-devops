@@ -48,7 +48,10 @@ echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
 # Enable HAProxy to be started by init script
 echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
 
-echo "Configured: Round-robin between web-02 & lb-01"
+# Enable HAProxy to be started by the init script
+sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
+
+echo "Configured: Round-robin between web-02 & web-01"
 
 # Start or restart HAProxy service
 if [ "$(pgrep -c haproxy)" -le 0 ]; then
