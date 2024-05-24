@@ -1,32 +1,30 @@
 #!/usr/bin/env bash
-# install load balancer
+#install and configure HAProxy load balancer
 
-
-echo -e "Updating and doing some minor checks...\n"
+echo -e "Updating and performing some minor checks...\n"
 
 function install() {
-        command -v "$1" &> /dev/null
+    command -v "$1" &> /dev/null
 
-        #shellcheck disable=SC2181
-        if [ $? -ne 0 ]; then
-                echo -e "        Installing: $1\n"
-                sudo apt-get update -y -qq && \
-                        sudo apt-get install -y "$1" -qq
-                echo -e "\n"
-        else
-                echo -e "        ${1} is already installed.\n"
-        fi
+    if [ $? -ne 0 ]; then
+        echo -e "Installing: $1\n"
+        sudo apt-get update -y -qq && \
+        sudo apt-get install -y "$1" -qq
+        echo -e "\n"
+    else
+        echo -e "$1 is already installed.\n"
+    fi
 }
 
-install haproxy #install haproxy
+install haproxy
 
-echo -e "\nSetting up some minor stuff.\n"
+echo -e "\nSetting up some minor configurations...\n"
 
-# backup default server config file
-sudo cp /etc/haproxy/haproxy.cfg haproxy_default.backup
+# Backup default HAProxy configuration file
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
 
-server_config=\
-"
+# Define HAProxy configuration
+server_config="
 defaults
   mode http
   timeout client 15s
@@ -34,26 +32,27 @@ defaults
   timeout server 15s
   timeout http-request 10s
 
-frontend thanks299-tech-frontend
+frontend http_front
     bind *:80
-    default_backend webservers
+    default_backend http_back
 
-backend thanks299-tech-backend
+backend http_back
     balance roundrobin
-    server 503248-web-01 34.232.69.22 check
-    server 503248-web-02 100.26.221.59 check
+    server 502383-web-01 35.168.3.207:80 check
+    server 502383-web-02 54.152.54.130:80 check
 "
 
-# shellcheck disable=SC2154
+# Update HAProxy configuration file
 echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
 
-# enable haproxy to be started by init script
+# Enable HAProxy to be started by init script
 echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
 
-echo "configured - Roundrobin On web-01 & web-02"
+echo "Configured: Round-robin between web-02 & lb-01"
 
+# Start or restart HAProxy service
 if [ "$(pgrep -c haproxy)" -le 0 ]; then
-        sudo service haproxy start
+    sudo service haproxy start
 else
-        sudo service haproxy restart
+    sudo service haproxy restart
 fi
