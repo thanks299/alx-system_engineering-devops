@@ -38,13 +38,8 @@ frontend http_front
 
 backend http_back
     balance roundrobin
-<<<<<<< HEAD
     server 502383-web-01 35.168.3.207:80 check
     server 502383-web-02 54.152.54.130:80 check
-=======
-    server 503248-web-01 35.168.3.207 check
-    server 503248-web-02 54.152.54.130 check
->>>>>>> 29e33191941895586497aa1863cc8742ab500979
 "
 
 # Update HAProxy configuration file
