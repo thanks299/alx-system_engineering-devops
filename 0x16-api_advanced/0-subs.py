@@ -5,6 +5,7 @@ A Script that queries subscribers on a given Reddit subreddit.
 
 import requests
 
+
 def number_of_subscribers(subreddit):
     url = "https://www.reddit.com/r/programming/about.json"
     headers = {"User-Agent": "Your custom user agent here"}
