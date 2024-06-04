@@ -8,7 +8,7 @@ import requests
 def top_ten(subreddit):
     """Returns ls of titles of the first ten hot posts"""
     link = 'https://www.reddit.com/r/{}/hot.json'
-    usr = {'User-Agent': 'Linux David'}
+    usr = {'User-Agent': 'Mozilla/5.0'}
     heads = []
 
     try:
