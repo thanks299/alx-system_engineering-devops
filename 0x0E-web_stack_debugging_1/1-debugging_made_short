@@ -1,4 +1,6 @@
-nx to run and listening on port 80
-sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo service nginx start
-sudo kill "$(pgrep 'nginx' | head -1)"
+#!/usr/bin/env bash
+# configures a server to listening on port 80 of all servers active IPv4 IPs
+
+sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
+sudo service nginx restart
+echo "" | sudo dd status=none of=/run/nginx.pid
